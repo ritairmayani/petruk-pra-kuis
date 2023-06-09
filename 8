@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+pair<int, int> binarySearch(const vector<int>& arr, int target) {
+    int left = 0;
+    int right = arr.size() - 1;
+    int iterations = 0;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        iterations++;
+
+        if (arr[mid] == target) {
+            return {mid, iterations};
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return {-1, iterations};
+}
+
+int main() {
+    int N;
+    cin >> N;
+
+    vector<int> A(N);
+    for (int i = 0; i < N; i++) {
+        cin >> A[i];
+    }
+
+    int X;
+    cin >> X;
+
+    pair<int, int> result = binarySearch(A, X);
+    cout << result.first << " " << result.second << endl;
+
+    return 0;
+}
